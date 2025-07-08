@@ -88,10 +88,20 @@
                     data-bs-parent="#menu"
                   >
                     <li class="w-100">
-                      <a href="allclothes.html" class="nav-link px-0">
+          
+                      <a href="#" class="nav-link px-0" onclick="loadPage()">
                         <span class="d-none d-sm-inline">Clothes</span>
                       </a>
                     </li>
+
+                       <li class="w-100">
+                      <button class="nav-link px-0" onclick="loadPage()">
+                      
+                        <span class="d-none d-sm-inline">Clothes2</span>
+                      </button>
+                    </li>
+
+                    
                     <li>
                       <a href="#" class="nav-link px-0">
                         <span class="d-none d-sm-inline">Outfits</span>
@@ -150,11 +160,16 @@
           class="col py-3 rounded"
           style="border: solid rgb(202, 185, 185) 1px"
         >
-          Content area...
+       <iframe id="contentFrame" width="100%" height="600px" style="border: none;"></iframe>
         </div>
       </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+  function loadPage() {
+    document.getElementById("contentFrame").src = "allclothes.html";
+  }
+</script>
   </body>
 </html>
