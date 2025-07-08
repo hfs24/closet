@@ -2,8 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Closet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -13,163 +12,181 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
     />
+
+    <style>
+      .navbar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .btn-nav {
+        padding: 10px 20px;
+        background-color: #eee;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: 0.3s;
+      }
+
+      .btn-nav.active {
+        background-color: #2563eb;
+        color: white;
+      }
+
+      /* Hide the first button on small screens */
+      @media (max-width: 480px) {
+        .btn-responsive {
+          display: none;
+        }
+      }
+
+      body {
+        background-color: #8cc3fd; /* Bootstrap blue */
+      }
+      .filterDiv {
+        float: left;
+        background-color: #2196f3;
+        color: #ffffff;
+        width: 100px;
+        line-height: 100px;
+        text-align: center;
+        margin: 2px;
+        display: none;
+      }
+
+      .show {
+        display: block;
+      }
+
+      .container {
+        margin-top: 20px;
+        overflow: hidden;
+      }
+
+      /* Style the buttons */
+
+      .btn:hover {
+        background-color: #ddd;
+      }
+
+      .btn.active {
+        background-color: #666;
+        color: white;
+      }
+    </style>
   </head>
 
   <body>
-    <nav
-      class="navbar navbar-expand-lg bg-danger-subtle rounded-end-3"
-      style="
-        background-image: url('https://www.realsimple.com/thmb/MVFXw24epb5H22oeuekVgzHsNYQ=/3000x0/filters:no_upscale():max_bytes(200000):strip_icc():format(webp)/clothing-2000-b5ef8d353ed54800b1a29e3e7c5b2709.jpg');
-        background-size: cover;
-        background-position: top;
-        background-repeat: no-repeat;
-        padding-top: 2rem;
-        padding-bottom: 2rem;
-      "
+    <div
+      id="myBtnContainer"
+      class="flex flex-wrap justify-center gap-4 p-4 bg-white shadow-md rounded-lg"
     >
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#"></a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mb-lg-0 ms-auto">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">
-                <i class="bi bi-house-door-fill"></i
-              ></a>
-            </li>
-          </ul>
+      <button class="btn-nav" onclick="filterSelection('all')">Show All</button>
+      <button class="btn-nav" onclick="filterSelection('shirt')">Shirts</button>
+      <button class="btn-nav" onclick="filterSelection('trouser')">
+        Trousers
+      </button>
+      <button class="btn-nav" onclick="filterSelection('coat')">Coat</button>
+      <button class="btn-nav" onclick="filterSelection('other')">Other</button>
+    </div>
+
+    <div class="container all text-center">
+      <div class="row row-cols-auto">
+        <div class="filterDiv shirt">shirt</div>
+        <div class="filterDiv shirt">shirt</div>
+        <div class="filterDiv shirt">shirt</div>
+        <div class="filterDiv trouser col p-0">
+          <img
+            src="https://cdn.platform.next/common/items/default/default/itemimages/3_4Ratio/product/lge/N18474s.jpg"
+            class="w-100 h-100 object-fit-cover"
+          />
         </div>
-      </div>
-    </nav>
-
-    <div class="container-fluid border" style="margin-top: -6.6em">
-      <div class="row flex-nowrap">
-        <div
-          style="background: linear-gradient(#ffffff, #f7cfde, #f781ac)"
-          class="col-auto col-md-2 col-xl-2 px-sm-2 px-0 rounded-end-4"
-        >
-          <div
-            class="min-vh-100 d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white"
-          >
-            <ul
-              style="padding-top: 120px"
-              class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
-              id="menu"
-            >
-              <strong>
-                <li class="text-dark nav-item">
-                  <a href="#" class="text-dark nav-link align-middle px-0">
-                    <i class="fs-4 bi-house"></i>
-                    <span class="ms-1 d-none d-sm-inline">Home</span>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#submenu1"
-                    data-bs-toggle="collapse"
-                    class="text-dark nav-link px-0 align-middle"
-                  >
-                    <i class="fs-4 bi-speedometer2"></i>
-                    <span class="ms-1 d-none d-sm-inline">All</span>
-                  </a>
-                  <ul
-                    class="collapse show nav flex-column ms-1"
-                    id="submenu1"
-                    data-bs-parent="#menu"
-                  >
-                    <li class="w-100">
-          
-                      <a href="#" class="nav-link px-0" onclick="loadPage()">
-                        <span class="d-none d-sm-inline">Clothes</span>
-                      </a>
-                    </li>
-
-                       <li class="w-100">
-                      <button class="nav-link px-0" onclick="loadPage()">
-                      
-                        <span class="d-none d-sm-inline">Clothes2</span>
-                      </button>
-                    </li>
-
-                    
-                    <li>
-                      <a href="#" class="nav-link px-0">
-                        <span class="d-none d-sm-inline">Outfits</span>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <a href="#" class="text-dark nav-link px-0 align-middle">
-                    <i class="fs-4 bi-calendar2-day"></i>
-                    <span class="ms-1 d-none d-sm-inline">Calendar</span></a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="#submenu2"
-                    data-bs-toggle="collapse"
-                    class="text-dark nav-link px-0 align-middle"
-                  >
-                    <i class="fs-4 bi-plus-circle"></i>
-                    <span class="ms-1 d-none d-sm-inline">Add</span></a
-                  >
-                  <ul
-                    class="collapse nav flex-column ms-1"
-                    id="submenu2"
-                    data-bs-parent="#menu"
-                  >
-                    <li class="w-100">
-                      <a href="#" class="nav-link px-0">
-                        <span class="d-none d-sm-inline">New </span>
-                        Clothes</a
-                      >
-                    </li>
-                    <li>
-                      <a href="#" class="nav-link px-0">
-                        <span class="d-none d-sm-inline">New</span> Outfit</a
-                      >
-                    </li>
-                  </ul>
-                </li>
-
-                <li>
-                  <a href="#" class="text-dark nav-link px-0 align-middle">
-                    <i class="fs-4 bi-heart"></i>
-                    <span class="ms-1 d-none d-sm-inline">Favorites</span>
-                  </a>
-                </li>
-              </strong>
-            </ul>
-
-            <hr />
-          </div>
+        <div class="filterDiv trouser col p-0">
+          <img
+            src="https://riseandfall.co/cdn/shop/files/APW-TRWL-CSH-U2-12GG-S-LIA.jpg?v=1744818403&width=700"
+            class="w-100 h-100 object-fit-cover"
+          />
+        </div>
+        <div class="filterDiv trouser col p-0">
+          <img
+            src="https://www.louchelondon.com/cdn/shop/products/ELINA-LILAC-SS23_2.jpg?v=1677499408"
+            class="w-100 h-100 object-fit-cover"
+          />
+        </div>
+        <div class="filterDiv coat">coat</div>
+        <div class="filterDiv coat">coat</div>
+        <div class="filterDiv other">other</div>
+        <div class="filterDiv other shirt">other/trouser</div>
+        <div class="filterDiv other">other</div>
+        <div class="filterDiv trouser col p-0">
+          <img
+            src="https://www.damart.co.uk/media/catalog/product/cache/e0641f7c62ee91230c5e14755392f1dd/7/5/75177-20918-F-1-HD-3.jpg"
+            class="w-100 h-100 object-fit-cover"
+          />
+        </div>
+        <div class="filterDiv trouser col p-0">
+          <img
+            src="https://busyclothing.co.uk/cdn/shop/products/white44340large_1200x1200.jpg?v=1534517861"
+            class="w-100 h-100 object-fit-cover"
+          />
         </div>
 
-        <div
-          class="col py-3 rounded"
-          style="border: solid rgb(202, 185, 185) 1px"
-        >
-       <iframe id="contentFrame" width="100%" height="600px" style="border: none;"></iframe>
+        <div class="filterDiv trouser col p-0">
+          <img
+            src="https://m.media-amazon.com/images/I/71Y9RcXbcVL._UY1000_.jpg"
+            class="w-100 h-100 object-fit-cover"
+          />
         </div>
       </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-  function loadPage() {
-    document.getElementById("contentFrame").src = "allclothes.html";
-  }
-</script>
+      filterSelection("all");
+      function filterSelection(c) {
+        var x, i;
+        x = document.getElementsByClassName("filterDiv");
+        if (c == "all") c = "";
+        for (i = 0; i < x.length; i++) {
+          w3RemoveClass(x[i], "show active");
+          if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show active");
+        }
+      }
+
+      function w3AddClass(element, name) {
+        var i, arr1, arr2;
+        arr1 = element.className.split(" ");
+        arr2 = name.split(" ");
+        for (i = 0; i < arr2.length; i++) {
+          if (arr1.indexOf(arr2[i]) == -1) {
+            element.className += " " + arr2[i];
+          }
+        }
+      }
+
+      function w3RemoveClass(element, name) {
+        var i, arr1, arr2;
+        arr1 = element.className.split(" ");
+        arr2 = name.split(" ");
+        for (i = 0; i < arr2.length; i++) {
+          while (arr1.indexOf(arr2[i]) > -1) {
+            arr1.splice(arr1.indexOf(arr2[i]), 1);
+          }
+        }
+        element.className = arr1.join(" ");
+      }
+
+      // Add active class to the current button (highlight it)
+      var btnContainer = document.getElementById("myBtnContainer");
+      var btns = btnContainer.getElementsByClassName("btn");
+      for (var i = 0; i < btns.length; i++) {
+        btns[i].addEventListener("click", function () {
+          var current = document.getElementsByClassName("active");
+          current[0].className = current[0].className.replace(" active", "");
+          this.className += " active";
+        });
+      }
+    </script>
   </body>
 </html>
