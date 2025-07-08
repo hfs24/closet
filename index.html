@@ -93,23 +93,27 @@
                         class="nav-link px-0"
                         onclick="showIframe('contentFrame')"
                       >
-                        <span class="d-none d-sm-inline">Clothes</span>
-                      </a>
+                        Clothes</a
+                      >
                     </li>
 
-                    <li>
+                    <li class="w-100">
                       <a
                         href="#"
                         class="nav-link px-0"
                         onclick="showIframe('contentFrame2')"
                       >
-                        <span class="d-none d-sm-inline">Outfits</span>
-                      </a>
+                        Outfits</a
+                      >
                     </li>
                   </ul>
                 </li>
                 <li>
-                  <a href="#" class="text-dark nav-link px-0 align-middle">
+                  <a
+                    href="#"
+                    class="text-dark nav-link px-0 align-middle"
+                    onclick="showIframe('contentFrame3')"
+                  >
                     <i class="fs-4 bi-calendar2-day"></i>
                     <span class="ms-1 d-none d-sm-inline">Calendar</span></a
                   >
@@ -171,33 +175,39 @@
             height="85%"
             style="border: none; margin-top: 6em; display: none"
           ></iframe>
+
+          <iframe
+            id="contentFrame3"
+            width="100%"
+            height="85%"
+            style="border: none; margin-top: 6em; display: none"
+          ></iframe>
         </div>
       </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-      function loadPage() {
-        document.getElementById("contentFrame").src = "template/allclothes.html";
-        document.getElementById("contentFrame2").src = "template/alloutfits.html";
-      }
-    </script>
+
     <script>
       window.onload = function () {
         document.getElementById("contentFrame").src = "template/allclothes.html";
         document.getElementById("contentFrame2").src = "template/alloutfits.html";
+        document.getElementById("contentFrame3").src = "template/calendar.html";
 
         // Show first iframe by default
         document.getElementById("contentFrame").style.display = "none";
         document.getElementById("contentFrame2").style.display = "none";
+        document.getElementById("contentFrame3").style.display = "none";
       };
 
       function showIframe(idToShow) {
         const frame1 = document.getElementById("contentFrame");
         const frame2 = document.getElementById("contentFrame2");
+        const frame3 = document.getElementById("contentFrame3");
 
         frame1.style.display = idToShow === "contentFrame" ? "block" : "none";
         frame2.style.display = idToShow === "contentFrame2" ? "block" : "none";
+        frame3.style.display = idToShow === "contentFrame3" ? "block" : "none";
       }
     </script>
   </body>
