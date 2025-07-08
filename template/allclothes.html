@@ -79,30 +79,8 @@
   </head>
 
   <body>
-            <div
-  
-      class="flex flex-wrap justify-center gap-4 p-4 bg-white shadow-md rounded-lg"
-    >
-      <button class="btn-nav" onclick="filterSelection('all')">Show All</button>
-      <button class="btn-nav" onclick="filterSelection('shirt')">Shirts</button>
-      <button class="btn-nav" onclick="filterSelection('trouser')">
-        Trousers
-      </button>
-      <button class="btn-nav" onclick="filterSelection('coat')">Coat</button>
-      <button class="btn-nav" onclick="filterSelection('other')">Other</button>
-    </div>
-        <div
-  
-      class="flex flex-wrap justify-center gap-4 p-4 bg-white shadow-md rounded-lg"
-    >
-      <button class="btn-nav" onclick="filterSelection('all')">Show All</button>
-      <button class="btn-nav" onclick="filterSelection('shirt')">Shirts</button>
-      <button class="btn-nav" onclick="filterSelection('trouser')">
-        Trousers
-      </button>
-      <button class="btn-nav" onclick="filterSelection('coat')">Coat</button>
-      <button class="btn-nav" onclick="filterSelection('other')">Other</button>
-    </div>
+
+TEEEEEEST
     <div
       id="myBtnContainer"
       class="flex flex-wrap justify-center gap-4 p-4 bg-white shadow-md rounded-lg"
@@ -115,7 +93,7 @@
       <button class="btn-nav" onclick="filterSelection('coat')">Coat</button>
       <button class="btn-nav" onclick="filterSelection('other')">Other</button>
     </div>
-
+ttttset
     <div class="container all text-center">
       <div class="row row-cols-auto">
         <div class="filterDiv shirt">shirt</div>
@@ -173,8 +151,8 @@
         x = document.getElementsByClassName("filterDiv");
         if (c == "all") c = "";
         for (i = 0; i < x.length; i++) {
-          w3RemoveClass(x[i], "show active");
-          if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show active");
+          w3RemoveClass(x[i], "show");
+          if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
         }
       }
 
