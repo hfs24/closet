@@ -66,11 +66,12 @@
                 // Create a "Remove" button
                 const removeBtn = document.createElement('button');
                 removeBtn.classList.add('delete-btn');
-                removeBtn.innerHTML = 'X';
+                removeBtn.innerHTML = 'XXXXXXXXX';
                 removeBtn.addEventListener('click', () => removeFromFavorites(imageUrl, index));
 
                 imgCol.appendChild(removeBtn);
                 gallery.appendChild(imgCol);
+                gallery.appendChild(removeBtn);
             });
 
             // If there are no favorites, show a message
