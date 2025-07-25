@@ -189,5 +189,25 @@
         });
       }
     </script>
+
+    
+    <script>
+  // Function to add image to favorites (localStorage)
+  function addToFavorites(imageUrl) {
+    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    if (!favorites.includes(imageUrl)) {
+      favorites.push(imageUrl); // Add image URL to favorites
+      localStorage.setItem("favorites", JSON.stringify(favorites));
+    }
+  }
+
+  // Attach click event to each image
+  document.querySelectorAll('.filterDiv img').forEach(img => {
+    img.addEventListener('click', function() {
+      addToFavorites(this.src); // Call function on click
+    });
+  });
+</script>
+
   </body>
 </html>
