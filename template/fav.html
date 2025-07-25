@@ -20,6 +20,17 @@
             max-height: 300px;
             object-fit: cover;
         }
+        .delete-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(255, 0, 0, 0.7);
+            color: white;
+            border: none;
+            padding: 5px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -39,15 +50,22 @@
             const gallery = document.getElementById("favoritesGallery");
 
             // Loop through the favorites array and display images
-            favorites.forEach(imageUrl => {
+            favorites.forEach((imageUrl, index) => {
                 const imgCol = document.createElement('div');
-                imgCol.classList.add('col-4', 'p-2');
+                imgCol.classList.add('col-4', 'p-2', 'position-relative');
 
                 const imgElement = document.createElement('img');
                 imgElement.src = imageUrl;
                 imgElement.classList.add('favorite-img', 'w-100');
                 imgCol.appendChild(imgElement);
 
+                // Create a "Remove" button
+                const removeBtn = document.createElement('button');
+                removeBtn.classList.add('delete-btn');
+                removeBtn.innerHTML = 'X';
+                removeBtn.addEventListener('click', () => removeFromFavorites(imageUrl, index));
+
+                imgCol.appendChild(removeBtn);
                 gallery.appendChild(imgCol);
             });
 
@@ -58,6 +76,20 @@
                 gallery.appendChild(message);
             }
         };
+
+        // Function to remove image from favorites
+        function removeFromFavorites(imageUrl, index) {
+            let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+            // Remove the image URL from the favorites array
+            favorites.splice(index, 1);
+
+            // Update localStorage
+            localStorage.setItem("favorites", JSON.stringify(favorites));
+
+            // Reload the page to update the gallery
+            location.reload();
+        }
     </script>
 </body>
 </html>
