@@ -158,7 +158,7 @@
                 </li> -->
 
                 <li>
-                  <a href="#" class="text-dark nav-link px-0 align-middle">
+                  <a href="#" class="text-dark nav-link px-0 align-middle" onclick="showIframe('contentFrame5')">
                     <i class="fs-4 bi-heart"></i>
                     <span class="ms-1 d-none d-sm-inline">Favorites</span>
                   </a>
@@ -199,6 +199,13 @@
             height="85%"
             style="border: none; margin-top: 6em; display: none"
           ></iframe>
+
+             <iframe
+            id="contentFrame5"
+            width="100%"
+            height="85%"
+            style="border: none; margin-top: 6em; display: none"
+          ></iframe>
         </div>
       </div>
     </div>
@@ -211,12 +218,14 @@
         document.getElementById("contentFrame1").src = "template/allshoes.html";
         document.getElementById("contentFrame2").src = "template/alloutfits.html";
         document.getElementById("contentFrame3").src = "template/calendar.html";
+           document.getElementById("contentFrame5").src = "template/calendar.html";
 
         // Show first iframe by default
         document.getElementById("contentFrame").style.display = "none";
          document.getElementById("contentFrame1").style.display = "none";
         document.getElementById("contentFrame2").style.display = "none";
         document.getElementById("contentFrame3").style.display = "none";
+         document.getElementById("contentFrame5").style.display = "none";
       };
 
       function showIframe(idToShow) {
@@ -224,11 +233,13 @@
         const frame4 = document.getElementById("contentFrame1");
         const frame2 = document.getElementById("contentFrame2");
         const frame3 = document.getElementById("contentFrame3");
+           const frame5 = document.getElementById("contentFrame5");
 
         frame1.style.display = idToShow === "contentFrame" ? "block" : "none";
         frame2.style.display = idToShow === "contentFrame2" ? "block" : "none";
         frame3.style.display = idToShow === "contentFrame3" ? "block" : "none";
         frame4.style.display = idToShow === "contentFrame1" ? "block" : "none";
+            frame5.style.display = idToShow === "contentFrame5" ? "block" : "none";
       }
     </script>
   </body>
