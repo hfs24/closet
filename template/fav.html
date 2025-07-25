@@ -20,7 +20,13 @@
             max-height: 300px;
             object-fit: cover;
             border-radius: 5px;
-            position: relative; /* Make sure this is inside the container */
+            display: block;
+        }
+        .img-container {
+            position: relative; /* Makes the button position relative to this container */
+            max-width: 100%; /* Ensures the image container doesn't overflow */
+            height: 300px; /* Set a fixed height */
+            overflow: hidden; /* Prevent overflow */
         }
         .delete-btn {
             position: absolute;
@@ -28,7 +34,7 @@
             right: 10px;
             background-color: rgba(255, 0, 0, 0.7);
             color: white;
-            border: solid red 10px;
+            border: solid red 2px;
             padding: 5px 10px;
             font-size: 18px;
             border-radius: 50%;
@@ -56,22 +62,25 @@
             // Loop through the favorites array and display images
             favorites.forEach((imageUrl, index) => {
                 const imgCol = document.createElement('div');
-                imgCol.classList.add('col-4', 'p-2', 'position-relative'); // Ensure position-relative
+                imgCol.classList.add('col-4', 'p-2');
+
+                const imgContainer = document.createElement('div');
+                imgContainer.classList.add('img-container');
 
                 const imgElement = document.createElement('img');
                 imgElement.src = imageUrl;
-                imgElement.classList.add('favorite-img', 'w-100');
-                imgCol.appendChild(imgElement);
+                imgElement.classList.add('favorite-img');
+                imgContainer.appendChild(imgElement);
 
                 // Create a "Remove" button
                 const removeBtn = document.createElement('button');
                 removeBtn.classList.add('delete-btn');
-                removeBtn.innerHTML = 'XXXXXXXXX';
+                removeBtn.innerHTML = 'X';
                 removeBtn.addEventListener('click', () => removeFromFavorites(imageUrl, index));
 
-                imgCol.appendChild(removeBtn);
+                imgContainer.appendChild(removeBtn);
+                imgCol.appendChild(imgContainer);
                 gallery.appendChild(imgCol);
-                gallery.appendChild(removeBtn);
             });
 
             // If there are no favorites, show a message
