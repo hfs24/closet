@@ -324,7 +324,7 @@ async function loadNotes() {
 
     // Create delete button
     const delBtn = document.createElement("button");
-    delBtn.textContent = "❌";
+    delBtn.textContent = "X";
     delBtn.style.marginLeft = "10px";
     delBtn.onclick = async () => {
       await db.collection("notes").doc(doc.id).delete();
