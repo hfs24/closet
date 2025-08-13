@@ -192,35 +192,22 @@
 
     
     <script>
-     
   // Function to add image to favorites (localStorage)
-
-
-      // Function to add image to favorites in Firestore
-async function addToFavorites(imageUrl) {
-  try {
-    const favoritesRef = db.collection("favorites");
-    // Check if the image is already in Firestore
-    const snapshot = await favoritesRef.where("url", "==", imageUrl).get();
-    if (snapshot.empty) {
-      await favoritesRef.add({ url: imageUrl, timestamp: Date.now() });
-      console.log("Added to favorites!");
-    } else {
-      console.log("Image already in favorites!");
+  function addToFavorites(imageUrl) {
+    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    if (!favorites.includes(imageUrl)) {
+      favorites.push(imageUrl); // Add image URL to favorites
+      localStorage.setItem("favorites", JSON.stringify(favorites));
     }
-  } catch (error) {
-    console.error("Error adding favorite:", error);
   }
-}
 
-// Attach click event to each image
-document.querySelectorAll('.filterDiv img').forEach(img => {
-  img.addEventListener('click', function() {
-    addToFavorites(this.src);
-    this.style.border = "3px solid green"; // visual feedback
+  // Attach click event to each image
+  document.querySelectorAll('.filterDiv img').forEach(img => {
+    img.addEventListener('click', function() {
+      addToFavorites(this.src); // Call function on click
+  this.style.border = "3px solid green"; // visual feedback
+    });
   });
-});
-
 </script>
 
   </body>
