@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"> 
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -13,12 +13,16 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
     />
+    <!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js"></script>
+
   </head>
 
   <body>
     <!-- Top navbar -->
     <nav
-      class="navbar navbar-expand-lg bg-danger-subtle rounded-end-3"
+      class="navbar navbar-expand-lg  rounded-end-3"
       style="
         background-image: url('https://www.realsimple.com/thmb/MVFXw24epb5H22oeuekVgzHsNYQ=/3000x0/filters:no_upscale():max_bytes(200000):strip_icc():format(webp)/clothing-2000-b5ef8d353ed54800b1a29e3e7c5b2709.jpg');
         background-size: cover;
@@ -123,7 +127,7 @@
                       <a 
                         href="#"
                         class="text-danger nav-link px-0"
-                        onclick="showIframe('contentFrame6')"
+                        onclick="showIframe('contentFrame')"
                       >
                        - Scarves</a
                       >
@@ -244,21 +248,68 @@
             height="85%"
             style="border: none; margin-top: 6em; display: none"
           ></iframe>
-
-          
-          <iframe
-            id="contentFrame6"
-            width="100%"
-            height="85%"
-            style="border: none; margin-top: 6em; display: none"
-          ></iframe>
         </div>
       </div>
     </div>
 
+
+<h3>My Notes</h3>
+<textarea id="noteInput" rows="3" placeholder="Write something..."></textarea>
+<button onclick="saveNote()">Save</button>
+
+<ul id="noteList"></ul>
+
+<script>
+async function loadNotes() {
+  const querySnapshot = await db.collection("notes").get();
+  const list = document.getElementById("noteList");
+  list.innerHTML = "";
+  querySnapshot.forEach((doc) => {
+    const li = document.createElement("li");
+    li.textContent = doc.data().text;
+    list.appendChild(li);
+  });
+}
+
+async function saveNote() {
+  const input = document.getElementById("noteInput");
+  if (input.value.trim()) {
+    await db.collection("notes").add({ text: input.value.trim() });
+    input.value = "";
+    loadNotes();
+  }
+}
+
+loadNotes();
+</script>
+
+
     <!-- End body -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyC7euLuQsnVFLJTAPvIZY09EQM_envFZeE",
+    authDomain: "closet-notes.firebaseapp.com",
+    projectId: "closet-notes",
+    storageBucket: "closet-notes.firebasestorage.app",
+    messagingSenderId: "268969012434",
+    appId: "1:268969012434:web:cc9026f73cf7f41742d10b"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+
+</script>
 
     <script>
       window.onload = function () {
@@ -266,16 +317,14 @@
         document.getElementById("contentFrame1").src = "template/allshoes.html";
         document.getElementById("contentFrame2").src = "template/alloutfits.html";
         document.getElementById("contentFrame3").src = "template/calendar.html";
-        document.getElementById("contentFrame5").src = "template/fav.html";
-        document.getElementById("contentFrame6").src = "template/scarf.html";
+           document.getElementById("contentFrame5").src = "template/fav.html";
 
         // Show first iframe by default
         document.getElementById("contentFrame").style.display = "none";
-        document.getElementById("contentFrame1").style.display = "none";
+         document.getElementById("contentFrame1").style.display = "none";
         document.getElementById("contentFrame2").style.display = "none";
         document.getElementById("contentFrame3").style.display = "none";
-        document.getElementById("contentFrame5").style.display = "none";
-        document.getElementById("contentFrame6").style.display = "none";
+         document.getElementById("contentFrame5").style.display = "none";
       };
 
  function showIframe(idToShow) {
@@ -284,5 +333,12 @@
   });
 }
     </script>
+
   </body>
 </html>
+
+
+
+
+
+
