@@ -1,3 +1,5 @@
+
+all
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -103,57 +105,18 @@
             src="https://cdn.platform.next/common/items/default/default/itemimages/3_4Ratio/product/lge/N18474s.jpg"
             class="w-100 h-100 object-fit-cover"
           />
-            <button class="fav-btn" style="
-      position: absolute;
-      top: 5px;
-      right: 5px;
-      background-color: rgba(0,0,0,0.6);
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 30px;
-      height: 30px;
-      cursor: pointer;
-      font-weight: bold;
-    ">O</button>
         </div>
         <div class="filterDiv trouser col p-0">
           <img
             src="https://riseandfall.co/cdn/shop/files/APW-TRWL-CSH-U2-12GG-S-LIA.jpg?v=1744818403&width=700"
             class="w-100 h-100 object-fit-cover"
           />
-            <button class="fav-btn" style="
-      position: absolute;
-      top: 5px;
-      right: 5px;
-      background-color: rgba(0,0,0,0.6);
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 30px;
-      height: 30px;
-      cursor: pointer;
-      font-weight: bold;
-    ">O</button>
         </div>
         <div class="filterDiv trouser col p-0">
           <img
             src="https://www.louchelondon.com/cdn/shop/products/ELINA-LILAC-SS23_2.jpg?v=1677499408"
             class="w-100 h-100 object-fit-cover"
           />
-            <button class="fav-btn" style="
-      position: absolute;
-      top: 5px;
-      right: 5px;
-      background-color: rgba(0,0,0,0.6);
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 30px;
-      height: 30px;
-      cursor: pointer;
-      font-weight: bold;
-    ">O</button>
         </div>
         <div class="filterDiv coat">coat</div>
         <div class="filterDiv coat">coat</div>
@@ -165,38 +128,12 @@
             src="https://www.damart.co.uk/media/catalog/product/cache/e0641f7c62ee91230c5e14755392f1dd/7/5/75177-20918-F-1-HD-3.jpg"
             class="w-100 h-100 object-fit-cover"
           />
-            <button class="fav-btn" style="
-      position: absolute;
-      top: 5px;
-      right: 5px;
-      background-color: rgba(0,0,0,0.6);
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 30px;
-      height: 30px;
-      cursor: pointer;
-      font-weight: bold;
-    ">O</button>
         </div>
         <div class="filterDiv trouser col p-0">
           <img
             src="https://busyclothing.co.uk/cdn/shop/products/white44340large_1200x1200.jpg?v=1534517861"
             class="w-100 h-100 object-fit-cover"
           />
-            <button class="fav-btn" style="
-      position: absolute;
-      top: 5px;
-      right: 5px;
-      background-color: rgba(0,0,0,0.6);
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 30px;
-      height: 30px;
-      cursor: pointer;
-      font-weight: bold;
-    ">O</button>
         </div>
 
         <div class="filterDiv trouser col p-0">
@@ -204,19 +141,6 @@
             src="https://m.media-amazon.com/images/I/71Y9RcXbcVL._UY1000_.jpg"
             class="w-100 h-100 object-fit-cover"
           />
-            <button class="fav-btn" style="
-      position: absolute;
-      top: 5px;
-      right: 5px;
-      background-color: rgba(0,0,0,0.6);
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 30px;
-      height: 30px;
-      cursor: pointer;
-      font-weight: bold;
-    ">O</button>
         </div>
       </div>
     </div>
@@ -270,33 +194,35 @@
 
     
     <script>
+     
   // Function to add image to favorites (localStorage)
-  function addToFavorites(imageUrl) {
-    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-    if (!favorites.includes(imageUrl)) {
-      favorites.push(imageUrl); // Add image URL to favorites
-      localStorage.setItem("favorites", JSON.stringify(favorites));
+
+
+      // Function to add image to favorites in Firestore
+async function addToFavorites(imageUrl) {
+  try {
+    const favoritesRef = db.collection("favorites");
+    // Check if the image is already in Firestore
+    const snapshot = await favoritesRef.where("url", "==", imageUrl).get();
+    if (snapshot.empty) {
+      await favoritesRef.add({ url: imageUrl, timestamp: Date.now() });
+      console.log("Added to favorites!");
+    } else {
+      console.log("Image already in favorites!");
     }
+  } catch (error) {
+    console.error("Error adding favorite:", error);
   }
+}
 
-  // Attach click event to each image
-//  document.querySelectorAll('.filterDiv img').forEach(img => {
-  // img.addEventListener('click', function() {
-  //addToFavorites(this.src);
-  //this.style.border = "3px solid green"; // visual feedback
-//});   });
-
-      // Only attach click event to the overlay button, not the whole image
-document.querySelectorAll('.fav-btn').forEach(btn => {
-  btn.addEventListener('click', function(event) {
-    event.stopPropagation(); // Prevent triggering other click events
-    const img = this.previousElementSibling; // Get the img element
-    addToFavorites(img.src);
-    this.style.backgroundColor = "green"; // Visual feedback
+// Attach click event to each image
+document.querySelectorAll('.filterDiv img').forEach(img => {
+  img.addEventListener('click', function() {
+    addToFavorites(this.src);
+    this.style.border = "3px solid green"; // visual feedback
   });
 });
 
-      
 </script>
 
   </body>
