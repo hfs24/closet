@@ -4,3 +4,66 @@
 <button onclick="saveNote()">Save</button>
 
 <ul id="noteList"></ul>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+<script>
+  // Your Firebase config
+  const firebaseConfig = {
+    apiKey: "AIzaSyC7euLuQsnVFLJTAPvIZY09EQM_envFZeE",
+    authDomain: "closet-notes.firebaseapp.com",
+    projectId: "closet-notes",
+    storageBucket: "closet-notes.firebasestorage.app",
+    messagingSenderId: "268969012434",
+    appId: "1:268969012434:web:cc9026f73cf7f41742d10b"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+
+  // Load notes from Firestore
+  async function loadNotes() {
+    const list = document.getElementById("noteList");
+    list.innerHTML = "";
+    const querySnapshot = await db.collection("notes").get();
+    querySnapshot.forEach((doc) => {
+      const li = document.createElement("li");
+      li.textContent = doc.data().text;
+      list.appendChild(li);
+    });
+  }
+
+  // Save a note to Firestore
+  async function saveNote() {
+    const input = document.getElementById("noteInput");
+    if (input.value.trim()) {
+      await db.collection("notes").add({ text: input.value.trim() });
+      input.value = "";
+      loadNotes();
+    }
+  }
+
+  window.onload = function () {
+    document.getElementById("contentFrame").src = "template/allclothes.html";
+    document.getElementById("contentFrame1").src = "template/allshoes.html";
+    document.getElementById("contentFrame2").src = "template/alloutfits.html";
+    document.getElementById("contentFrame3").src = "template/calendar.html";
+    document.getElementById("contentFrame4").src = "template/notes.html";
+    document.getElementById("contentFrame5").src = "template/fav.html";
+
+    // Hide all iframes initially
+    document.querySelectorAll("iframe").forEach(f => f.style.display = "none");
+
+    // Load notes on page load
+    loadNotes();
+  };
+
+ function showIframe(idToShow) {
+  document.querySelectorAll("iframe").forEach(f => f.style.display = f.id === idToShow ? "block" : "none");
+  document.getElementById(idToShow).scrollIntoView({ behavior: 'smooth' });
+}
+
+</script>
