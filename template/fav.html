@@ -76,7 +76,9 @@
                 const removeBtn = document.createElement('button');
                 removeBtn.classList.add('delete-btn');
                 removeBtn.innerHTML = 'X';
-                removeBtn.addEventListener('click', () => removeFromFavorites(imageUrl, index));
+                //removeBtn.addEventListener('click', () => removeFromFavorites(imageUrl, index));
+                removeBtn.addEventListener('click', () => { removeFromFavorites(imageUrl); imgCol.remove(); // Remove from DOM
+});
 
                 imgContainer.appendChild(removeBtn);
                 imgCol.appendChild(imgContainer);
