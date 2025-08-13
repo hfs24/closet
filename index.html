@@ -71,12 +71,11 @@
       -->
     </nav>
 
-
     <!-- sidebar -->
     <div class="container-fluid border" style="margin-top: -6.6em">
       <div class="row flex-nowrap">
         <div
-          style="background: linear-gradient(#ffffff, #f7cfde, #f781ac)"
+          style="background: linear-gradient(#ffffff, #FFF2FC, #f7cfde)"
           class="col-auto col-md-2 col-xl-2 px-sm-2 px-0 rounded-end-4"
         >
           <div
@@ -88,7 +87,7 @@
               id="menu"
             >
               <strong>
-              <!--  <li class="text-dark nav-item">
+                <!--  <li class="text-dark nav-item">
                   <a href="#" class="text-dark nav-link align-middle px-0">
                     <i class="fs-4 bi-house"></i>
                     <span class="ms-1 d-none d-sm-inline">Home</span>
@@ -101,41 +100,42 @@
                     class="text-dark nav-link px-0 align-middle"
                   >
                     <i class="fs-4 bi-speedometer2"></i>
-                    <span class="ms-1 d-none d-sm-inline">All</span>
+                    <span class="ms-1 d-none d-sm-inline ">Category</span>
                   </a>
 
                   <ul
                     class="collapse nav flex-column ms-1"
                     id="submenu1"
                     data-bs-parent="#menu"
+                    
                   >
                     <li class="w-100">
-                      <a
+                      <a 
                         href="#"
-                        class="nav-link px-0"
+                        class="text-danger nav-link px-0"
                         onclick="showIframe('contentFrame')"
                       >
-                        Clothes</a
-                      >
-                    </li>
-
-                     <li class="w-100">
-                      <a
-                        href="#"
-                        class="nav-link px-0"
-                        onclick="showIframe('contentFrame1')"
-                      >
-                        Shoes</a
+                       - Clothes</a
                       >
                     </li>
 
                     <li class="w-100">
                       <a
                         href="#"
-                        class="nav-link px-0"
+                        class=" text-danger nav-link px-0"
+                        onclick="showIframe('contentFrame1')"
+                      >
+                       - Shoes</a
+                      >
+                    </li>
+
+                    <li class="w-100">
+                      <a
+                        href="#"
+                        class="text-danger nav-link px-0"
                         onclick="showIframe('contentFrame2')"
                       >
-                        Outfits</a
+                       - Outfits</a
                       >
                     </li>
                   </ul>
@@ -147,10 +147,10 @@
                     onclick="showIframe('contentFrame3')"
                   >
                     <i class="fs-4 bi-calendar2-day"></i>
-                    <span class="ms-1 d-none d-sm-inline">Calendar</span></a
+                    <span class="ms-1 d-none d-sm-inline" >Calendar</span></a
                   >
                 </li>
-             <!--  <li>
+                <!--  <li>
                   <a
                     href="#submenu2"
                     data-bs-toggle="collapse"
@@ -179,7 +179,11 @@
                 </li> -->
 
                 <li>
-                  <a href="#" class="text-dark nav-link px-0 align-middle" onclick="showIframe('contentFrame5')">
+                  <a
+                    href="#"
+                    class="text-dark nav-link px-0 align-middle"
+                    onclick="showIframe('contentFrame5')"
+                  >
                     <i class="fs-4 bi-heart"></i>
                     <span class="ms-1 d-none d-sm-inline">Favorites</span>
                   </a>
@@ -190,9 +194,9 @@
             <hr />
           </div>
         </div>
-        
-<!-- end sidebar -->
-        
+
+        <!-- end sidebar -->
+
         <!-- body -->
         <div
           class="col py-3 rounded"
@@ -204,7 +208,7 @@
             height="85%"
             style="border: none; margin-top: 6em; display: none"
           ></iframe>
-            <iframe
+          <iframe
             id="contentFrame1"
             width="100%"
             height="85%"
@@ -224,7 +228,7 @@
             style="border: none; margin-top: 6em; display: none"
           ></iframe>
 
-             <iframe
+          <iframe
             id="contentFrame5"
             width="100%"
             height="85%"
@@ -233,7 +237,6 @@
         </div>
       </div>
     </div>
-
 
     <!-- End body -->
 
