@@ -180,7 +180,7 @@
 
       // Add active class to the current button (highlight it)
       var btnContainer = document.getElementById("myBtnContainer");
-      var btns = btnContainer.getElementsByClassName("btn");
+      var btns = btnContainer.getElementsByClassName("btn-nav");
       for (var i = 0; i < btns.length; i++) {
         btns[i].addEventListener("click", function () {
           var current = document.getElementsByClassName("active");
@@ -205,6 +205,7 @@
   document.querySelectorAll('.filterDiv img').forEach(img => {
     img.addEventListener('click', function() {
       addToFavorites(this.src); // Call function on click
+  this.style.border = "3px solid green"; // visual feedback
     });
   });
 </script>
