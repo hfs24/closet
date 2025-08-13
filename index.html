@@ -312,17 +312,30 @@
   firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore();
 
-  // Load notes from Firestore
-  async function loadNotes() {
-    const list = document.getElementById("noteList");
-    list.innerHTML = "";
-    const querySnapshot = await db.collection("notes").get();
-    querySnapshot.forEach((doc) => {
-      const li = document.createElement("li");
-      li.textContent = doc.data().text;
-      list.appendChild(li);
-    });
-  }
+// Load notes from Firestore
+async function loadNotes() {
+  const list = document.getElementById("noteList");
+  list.innerHTML = "";
+  const querySnapshot = await db.collection("notes").get();
+
+  querySnapshot.forEach((doc) => {
+    const li = document.createElement("li");
+    li.textContent = doc.data().text + " ";
+
+    // Create delete button
+    const delBtn = document.createElement("button");
+    delBtn.textContent = "❌";
+    delBtn.style.marginLeft = "10px";
+    delBtn.onclick = async () => {
+      await db.collection("notes").doc(doc.id).delete();
+      loadNotes(); // refresh list
+    };
+
+    li.appendChild(delBtn);
+    list.appendChild(li);
+  });
+}
+
 
   // Save a note to Firestore
   async function saveNote() {
