@@ -119,6 +119,16 @@
                       >
                     </li>
 
+                          <li class="w-100">
+                      <a 
+                        href="#"
+                        class="text-danger nav-link px-0"
+                        onclick="showIframe('contentFrame')"
+                      >
+                       - Scarves</a
+                      >
+                    </li>
+
                     <li class="w-100">
                       <a
                         href="#"
@@ -258,19 +268,11 @@
          document.getElementById("contentFrame5").style.display = "none";
       };
 
-      function showIframe(idToShow) {
-        const frame1 = document.getElementById("contentFrame");
-        const frame4 = document.getElementById("contentFrame1");
-        const frame2 = document.getElementById("contentFrame2");
-        const frame3 = document.getElementById("contentFrame3");
-           const frame5 = document.getElementById("contentFrame5");
-
-        frame1.style.display = idToShow === "contentFrame" ? "block" : "none";
-        frame2.style.display = idToShow === "contentFrame2" ? "block" : "none";
-        frame3.style.display = idToShow === "contentFrame3" ? "block" : "none";
-        frame4.style.display = idToShow === "contentFrame1" ? "block" : "none";
-            frame5.style.display = idToShow === "contentFrame5" ? "block" : "none";
-      }
+ function showIframe(idToShow) {
+  document.querySelectorAll("iframe").forEach((frame) => {
+    frame.style.display = frame.id === idToShow ? "block" : "none";
+  });
+}
     </script>
   </body>
 </html>
