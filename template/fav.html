@@ -52,12 +52,11 @@
     </div>
 
     <script>
-
-        window.onload = async function() {
+             window.onload = async function() {
   const gallery = document.getElementById("favoritesGallery");
   gallery.innerHTML = "";
 
-  try {
+             try {
     const querySnapshot = await db.collection("favorites").orderBy("timestamp", "desc").get();
     if (querySnapshot.empty) {
       const message = document.createElement('p');
@@ -66,22 +65,22 @@
       return;
     }
 
-    querySnapshot.forEach((doc) => {
+                  querySnapshot.forEach((doc) => {
       const imageUrl = doc.data().url;
       const docId = doc.id; // Firestore document ID
 
-      const imgCol = document.createElement('div');
+                     const imgCol = document.createElement('div');
       imgCol.classList.add('col-12', 'col-sm-6', 'col-md-4', 'p-2');
 
-      const imgContainer = document.createElement('div');
+                    const imgContainer = document.createElement('div');
       imgContainer.classList.add('img-container');
 
-      const imgElement = document.createElement('img');
+             const imgElement = document.createElement('img');
       imgElement.src = imageUrl;
       imgElement.classList.add('favorite-img');
       imgContainer.appendChild(imgElement);
 
-      // Remove button
+                // Remove button
       const removeBtn = document.createElement('button');
       removeBtn.classList.add('delete-btn');
       removeBtn.innerHTML = 'X';
@@ -90,7 +89,7 @@
         imgCol.remove(); // remove from DOM
       });
 
-      imgContainer.appendChild(removeBtn);
+            imgContainer.appendChild(removeBtn);
       imgCol.appendChild(imgContainer);
       gallery.appendChild(imgCol);
     });
@@ -99,6 +98,6 @@
   }
 };
 
-    </script>
+               </script>
 </body>
 </html>
