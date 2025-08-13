@@ -13,18 +13,24 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
     />
+  <style>
+    #noteList {
+  position: relative;
+  z-index: 1000; /* Make it on top of iframes */
+}
 
+#noteList li {
+  position: relative; /* So buttons inside li can be on top */
+}
+
+  </style>
   </head>
+
+
 
   <body>
    
-
-        <!-- body -->
-        <div
-          class="col py-3 rounded"
-          style="border: solid rgb(202, 185, 185) 1px"
-        >
-          
+        
 
 <h3>--------- My Notes  ---------  </h3>
 <textarea id="noteInput" rows="3" placeholder="Write something..."></textarea>
@@ -34,7 +40,7 @@
 
 
           
-        </div>
+     
       </div>
     </div>
 
@@ -74,11 +80,20 @@ async function loadNotes() {
   querySnapshot.forEach((doc) => {
     const li = document.createElement("li");
     li.textContent = doc.data().text + " ";
+    li.style.listStyle = "none"; // Remove bullet points
+    li.style.margin = "8px 0"; // Add spacing
 
     // Create delete button
     const delBtn = document.createElement("button");
-    delBtn.textContent = "X";
-    delBtn.style.marginLeft = "10px";
+    delBtn.textContent = "XXXXXXXXX";
+    delBtn.style.fontSize = "20px"; // Bigger
+    delBtn.style.fontWeight = "bold";
+    delBtn.style.color = "red";
+    delBtn.style.background = "transparent";
+    delBtn.style.border = "none";
+    delBtn.style.cursor = "pointer";
+    delBtn.title = "Delete this note";
+
     delBtn.onclick = async () => {
       await db.collection("notes").doc(doc.id).delete();
       loadNotes(); // refresh list
@@ -88,6 +103,7 @@ async function loadNotes() {
     list.appendChild(li);
   });
 }
+
 
 
   // Save a note to Firestore
