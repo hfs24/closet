@@ -368,6 +368,9 @@ async function loadNotes() {
   }
 
   window.onload = function () {
+     // Load notes on page load
+    loadNotes();
+    
     document.getElementById("contentFrame").src = "template/allclothes.html";
     document.getElementById("contentFrame1").src = "template/allshoes.html";
     document.getElementById("contentFrame2").src = "template/alloutfits.html";
@@ -378,8 +381,7 @@ async function loadNotes() {
     // Hide all iframes initially
     document.querySelectorAll("iframe").forEach(f => f.style.display = "none");
 
-    // Load notes on page load
-    loadNotes();
+   
   };
 
  function showIframe(idToShow) {
