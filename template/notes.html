@@ -117,24 +117,12 @@ async function loadNotes() {
   }
 
   window.onload = function () {
-    document.getElementById("contentFrame").src = "template/allclothes.html";
-    document.getElementById("contentFrame1").src = "template/allshoes.html";
-    document.getElementById("contentFrame2").src = "template/alloutfits.html";
-    document.getElementById("contentFrame3").src = "template/calendar.html";
-    document.getElementById("contentFrame4").src = "template/notes.html";
-    document.getElementById("contentFrame5").src = "template/fav.html";
-
-    // Hide all iframes initially
-    document.querySelectorAll("iframe").forEach(f => f.style.display = "none");
-
+  
     // Load notes on page load
     loadNotes();
   };
 
- function showIframe(idToShow) {
-  document.querySelectorAll("iframe").forEach(f => f.style.display = f.id === idToShow ? "block" : "none");
-  document.getElementById(idToShow).scrollIntoView({ behavior: 'smooth' });
-}
+
 
 </script>
 
