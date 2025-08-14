@@ -51,59 +51,72 @@
         </div>
     </div>
 
-    <script>
-        window.onload = function() {
-            // Get favorites from localStorage
-            let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 
-            // Get the favorites gallery container
-            const gallery = document.getElementById("favoritesGallery");
+<script>
+  // Firebase config
+  const firebaseConfig = {
+    apiKey: "AIzaSyC7euLuQsnVFLJTAPvIZY09EQM_envFZeE",
+    authDomain: "closet-notes.firebaseapp.com",
+    projectId: "closet-notes",
+    storageBucket: "closet-notes.firebasestorage.app",
+    messagingSenderId: "268969012434",
+    appId: "1:268969012434:web:cc9026f73cf7f41742d10b"
+  };
 
-            // Loop through the favorites array and display images
-            favorites.forEach((imageUrl, index) => {
-                const imgCol = document.createElement('div');
-                imgCol.classList.add('col-4', 'p-2');
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
 
-                const imgContainer = document.createElement('div');
-                imgContainer.classList.add('img-container');
+  async function loadFavorites() {
+    const gallery = document.getElementById("favoritesGallery");
+    gallery.innerHTML = "";
 
-                const imgElement = document.createElement('img');
-                imgElement.src = imageUrl;
-                imgElement.classList.add('favorite-img');
-                imgContainer.appendChild(imgElement);
+    const querySnapshot = await db.collection("favorites").orderBy("addedAt", "desc").get();
 
-                // Create a "Remove" button
-                const removeBtn = document.createElement('button');
-                removeBtn.classList.add('delete-btn');
-                removeBtn.innerHTML = 'X';
-                removeBtn.addEventListener('click', () => {
-    removeFromFavorites(imageUrl);
-    imgCol.remove(); // Remove from DOM
-});
+    if (querySnapshot.empty) {
+      const message = document.createElement('p');
+      message.textContent = 'You have no favorites yet.';
+      gallery.appendChild(message);
+      return;
+    }
 
+    querySnapshot.forEach(doc => {
+      const imageUrl = doc.data().url;
 
-                imgContainer.appendChild(removeBtn);
-                imgCol.appendChild(imgContainer);
-                gallery.appendChild(imgCol);
-            });
+      const imgCol = document.createElement('div');
+      imgCol.classList.add('col-4', 'p-2');
 
-            // If there are no favorites, show a message
-            if (favorites.length === 0) {
-                const message = document.createElement('p');
-                message.textContent = 'You have no favorites yet.';
-                gallery.appendChild(message);
-            }
-        };
+      const imgContainer = document.createElement('div');
+      imgContainer.classList.add('img-container');
 
-        // Function to remove image from favorites
-       function removeFromFavorites(imageUrl) {
-    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-    // Remove by value instead of index
-    favorites = favorites.filter(url => url !== imageUrl);
-    localStorage.setItem("favorites", JSON.stringify(favorites));
-    location.reload();
-}
+      const imgElement = document.createElement('img');
+      imgElement.src = imageUrl;
+      imgElement.classList.add('favorite-img');
+      imgContainer.appendChild(imgElement);
 
-    </script>
+      const removeBtn = document.createElement('button');
+      removeBtn.classList.add('delete-btn');
+      removeBtn.innerHTML = 'X';
+      removeBtn.addEventListener('click', () => {
+        removeFromFavorites(imageUrl);
+        imgCol.remove();
+      });
+
+      imgContainer.appendChild(removeBtn);
+      imgCol.appendChild(imgContainer);
+      gallery.appendChild(imgCol);
+    });
+  }
+
+  async function removeFromFavorites(imageUrl) {
+    await db.collection("favorites").doc(imageUrl).delete();
+    console.log("Removed from favorites:", imageUrl);
+  }
+
+  window.onload = loadFavorites;
+</script>
+
 </body>
 </html>
