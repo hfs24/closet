@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
@@ -13,72 +12,10 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
     />
-
     <style>
-      .navbar {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-      }
-
-      .btn-nav {
-        padding: 10px 20px;
-        background-color: #eee;
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-        font-weight: 500;
-        transition: 0.3s;
-      }
-
-      .btn-nav.active {
-        background-color: #2563eb;
-        color: white;
-      }
-
-      /* Hide the first button on small screens */
-      @media (max-width: 480px) {
-        .btn-responsive {
-          display: none;
-        }
-      }
-
-      body {
-        background-color: #8cc3fd; /* Bootstrap blue */
-      }
-      .filterDiv {
-        float: left;
-        background-color: #2196f3;
-        color: #ffffff;
-        width: 100px;
-        line-height: 100px;
-        text-align: center;
-        margin: 2px;
-        display: none;
-      }
-
-      .show {
-        display: block;
-      }
-
-      .container {
-        margin-top: 20px;
-        overflow: hidden;
-      }
-
-      /* Style the buttons */
-
-      .btn:hover {
-        background-color: #ddd;
-      }
-
-      .btn.active {
-        background-color: #666;
-        color: white;
-      }
+      .navbar { display: flex; flex-wrap: wrap; gap: 10px; } .btn-nav { padding: 10px 20px; background-color: #eee; border: none; border-radius: 6px; cursor: pointer; font-weight: 500; transition: 0.3s; } .btn-nav.active { background-color: #2563eb; color: white; } /* Hide the first button on small screens */ @media (max-width: 480px) { .btn-responsive { display: none; } } body { background-color: #8cc3fd; /* Bootstrap blue */ } .filterDiv { float: left; background-color: #2196f3; color: #ffffff; width: 100px; line-height: 100px; text-align: center; margin: 2px; display: none; } .show { display: block; } .container { margin-top: 20px; overflow: hidden; } /* Style the buttons */ .btn:hover { background-color: #ddd; } .btn.active { background-color: #666; color: white; }
     </style>
   </head>
-
   <body>
     <div
       id="myBtnContainer"
@@ -92,7 +29,6 @@
       <button class="btn-nav" onclick="filterSelection('coat')">Coat</button>
       <button class="btn-nav" onclick="filterSelection('other')">Other</button>
     </div>
-
     <div class="container all text-center">
       <div class="row row-cols-auto">
         <div class="filterDiv shirt">shirt</div>
@@ -133,7 +69,6 @@
             class="w-100 h-100 object-fit-cover"
           />
         </div>
-
         <div class="filterDiv trouser col p-0">
           <img
             src="https://m.media-amazon.com/images/I/71Y9RcXbcVL._UY1000_.jpg"
@@ -142,98 +77,27 @@
         </div>
       </div>
     </div>
-
     <script>
-      filterSelection("all");
-      function filterSelection(c) {
-        var x, i;
-        x = document.getElementsByClassName("filterDiv");
-        if (c == "all") c = "";
-        for (i = 0; i < x.length; i++) {
-          w3RemoveClass(x[i], "show");
-          if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
-        }
-      }
-
+      filterSelection("all"); function filterSelection(c) { 
+        var x, i; x = document.getElementsByClassName("filterDiv"); 
+        if (c == "all") c = ""; for (i = 0; i < x.length; i++) { w3RemoveClass(x[i], "show"); 
+      if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show"); } }
+      
       function w3AddClass(element, name) {
-        var i, arr1, arr2;
-        arr1 = element.className.split(" ");
-        arr2 = name.split(" ");
-        for (i = 0; i < arr2.length; i++) {
-          if (arr1.indexOf(arr2[i]) == -1) {
-            element.className += " " + arr2[i];
-          }
-        }
-      }
-
-      function w3RemoveClass(element, name) {
-        var i, arr1, arr2;
-        arr1 = element.className.split(" ");
-        arr2 = name.split(" ");
-        for (i = 0; i < arr2.length; i++) {
-          while (arr1.indexOf(arr2[i]) > -1) {
-            arr1.splice(arr1.indexOf(arr2[i]), 1);
-          }
-        }
-        element.className = arr1.join(" ");
-      }
-
-      // Add active class to the current button (highlight it)
-      var btnContainer = document.getElementById("myBtnContainer");
-      var btns = btnContainer.getElementsByClassName("btn-nav");
-      for (var i = 0; i < btns.length; i++) {
-        btns[i].addEventListener("click", function () {
-          var current = document.getElementsByClassName("active");
-          current[0].className = current[0].className.replace(" active", "");
-          this.className += " active";
-        });
-      }
+        var i, arr1, arr2; arr1 = element.className.split(" "); arr2 = name.split(" "); 
+        
+        for (i = 0; i < arr2.length; i++)
+          { if (arr1.indexOf(arr2[i]) == -1) { element.className += " " + arr2[i]; } } } 
+      
+      function w3RemoveClass(element, name) { var i, arr1, arr2; arr1 = element.className.split(" ");
+                    arr2 = name.split(" ");
+                                             
+for (i = 0; i < arr2.length; i++) { 
+  
+  while (arr1.indexOf(arr2[i]) > -1) { arr1.splice(arr1.indexOf(arr2[i]), 1); } } element.className = arr1.join(" "); } // Add active class to the current button (highlight it) var btnContainer = document.getElementById("myBtnContainer"); var btns = btnContainer.getElementsByClassName("btn-nav"); for (var i = 0; i < btns.length; i++) { btns[i].addEventListener("click", function () { var current = document.getElementsByClassName("active"); current[0].className = current[0].className.replace(" active", ""); this.className += " active"; }); }
     </script>
-
-    
-<!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
-
-<script>
-  const firebaseConfig = {
-    apiKey: "AIzaSyC7euLuQsnVFLJTAPvIZY09EQM_envFZeE",
-    authDomain: "closet-notes.firebaseapp.com",
-    projectId: "closet-notes",
-    storageBucket: "closet-notes.firebasestorage.app",
-    messagingSenderId: "268969012434",
-    appId: "1:268969012434:web:cc9026f73cf7f41742d10b"
-  };
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore();
-
-  function encodeId(url) {
-    return btoa(url); // Base64 encode so Firestore accepts it
-  }
-
-  async function addToFavorites(imageUrl) {
-    const safeId = encodeId(imageUrl);
-    const docRef = db.collection("favorites").doc(safeId);
-
-    const docSnap = await docRef.get();
-    if (!docSnap.exists) {
-      await docRef.set({
-        url: imageUrl,
-        addedAt: firebase.firestore.FieldValue.serverTimestamp()
-      });
-      console.log("Added to favorites:", imageUrl);
-    }
-  }
-
-  document.querySelectorAll('.filterDiv img').forEach(img => {
-    img.addEventListener('click', function() {
-      addToFavorites(this.src);
-      this.style.border = "3px solid green";
-    });
-  });
-</script>
-
-
-
+    <script>
+      // Function to add image to favorites (localStorage) function addToFavorites(imageUrl) { let favorites = JSON.parse(localStorage.getItem("favorites")) || []; if (!favorites.includes(imageUrl)) { favorites.push(imageUrl); // Add image URL to favorites localStorage.setItem("favorites", JSON.stringify(favorites)); } } // Attach click event to each image document.querySelectorAll('.filterDiv img').forEach(img => { img.addEventListener('click', function() { addToFavorites(this.src); // Call function on click this.style.border = "3px solid green"; // visual feedback }); });
+    </script>
   </body>
 </html>
