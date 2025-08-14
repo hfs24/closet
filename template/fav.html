@@ -56,7 +56,6 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 
 <script>
-  // Firebase config
   const firebaseConfig = {
     apiKey: "AIzaSyC7euLuQsnVFLJTAPvIZY09EQM_envFZeE",
     authDomain: "closet-notes.firebaseapp.com",
@@ -65,9 +64,12 @@
     messagingSenderId: "268969012434",
     appId: "1:268969012434:web:cc9026f73cf7f41742d10b"
   };
-
   firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore();
+
+  function encodeId(url) {
+    return btoa(url);
+  }
 
   async function loadFavorites() {
     const gallery = document.getElementById("favoritesGallery");
@@ -76,9 +78,7 @@
     const querySnapshot = await db.collection("favorites").orderBy("addedAt", "desc").get();
 
     if (querySnapshot.empty) {
-      const message = document.createElement('p');
-      message.textContent = 'You have no favorites yet.';
-      gallery.appendChild(message);
+      gallery.innerHTML = '<p>You have no favorites yet.</p>';
       return;
     }
 
@@ -111,12 +111,14 @@
   }
 
   async function removeFromFavorites(imageUrl) {
-    await db.collection("favorites").doc(imageUrl).delete();
+    const safeId = encodeId(imageUrl);
+    await db.collection("favorites").doc(safeId).delete();
     console.log("Removed from favorites:", imageUrl);
   }
 
   window.onload = loadFavorites;
 </script>
+
 
 </body>
 </html>
