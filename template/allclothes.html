@@ -191,12 +191,11 @@
     </script>
 
     
- <!-- Firebase SDK -->
+<!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 
 <script>
-  // Your Firebase config
   const firebaseConfig = {
     apiKey: "AIzaSyC7euLuQsnVFLJTAPvIZY09EQM_envFZeE",
     authDomain: "closet-notes.firebaseapp.com",
@@ -205,29 +204,35 @@
     messagingSenderId: "268969012434",
     appId: "1:268969012434:web:cc9026f73cf7f41742d10b"
   };
-
   firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore();
 
-  // Function to add image to favorites (Firestore)
-  async function addToFavorites(imageUrl) {
-    const docRef = db.collection("favorites").doc(imageUrl); 
-    const docSnap = await docRef.get();
+  function encodeId(url) {
+    return btoa(url); // Base64 encode so Firestore accepts it
+  }
 
+  async function addToFavorites(imageUrl) {
+    const safeId = encodeId(imageUrl);
+    const docRef = db.collection("favorites").doc(safeId);
+
+    const docSnap = await docRef.get();
     if (!docSnap.exists) {
-      await docRef.set({ url: imageUrl, addedAt: firebase.firestore.FieldValue.serverTimestamp() });
+      await docRef.set({
+        url: imageUrl,
+        addedAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
       console.log("Added to favorites:", imageUrl);
     }
   }
 
-  // Attach click event to each image
   document.querySelectorAll('.filterDiv img').forEach(img => {
     img.addEventListener('click', function() {
       addToFavorites(this.src);
-      this.style.border = "3px solid green"; // visual feedback
+      this.style.border = "3px solid green";
     });
   });
 </script>
+
 
 
   </body>
